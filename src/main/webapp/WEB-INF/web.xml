@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <description>MySQL Test App</description>
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/ConnectionPool</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    <servlet>
+        <servlet-name>mainPage</servlet-name>
+        <servlet-class>com.epam.java.ft.servlets.MainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mainPage</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>registrationFilter</filter-name>
+        <filter-class>com.epam.java.ft.filters.RegistrationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>registrationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <servlet-name>mainPage</servlet-name>
+    </filter-mapping>
+    <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>view/index.html</welcome-file>
+        <welcome-file>view/index.jsp</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <exception-type>java.lang.Error</exception-type>
+        <location>/ErrorPage</location>
+    </error-page>
+</web-app>
